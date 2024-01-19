@@ -1,0 +1,1122 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://example.org/programming_languages.owl"
+         xmlns="http://example.org/programming_languages.owl#">
+
+<owl:Ontology rdf:about="http://example.org/programming_languages.owl"/>
+
+<owl:ObjectProperty rdf:about="#used_for">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#UseCase"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_similar_syntax_to">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#inspired_by">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+  <owl:inverseOf rdf:resource="#inspired"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#inspired">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+  <owl:inverseOf rdf:resource="#inspired_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#from_the_same_creators">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#inter_op_with">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#ProgrammingLanguage"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#runs_on">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#RunningEnvironment"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_feature">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#Feature"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_error_handling_type">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#ErrorHandling"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_evaluation_type">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#EvaluationStrategy"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_type_checking">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#TypeChecking"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_type_safety">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#TypeSafety"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_memory_management">
+  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
+  <rdfs:range rdf:resource="#MemoryManagement"/>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#Feature">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Abstraction">
+  <rdfs:subClassOf rdf:resource="#Feature"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Statements">
+  <rdfs:subClassOf rdf:resource="#Abstraction"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CodeStructures">
+  <rdfs:subClassOf rdf:resource="#Abstraction"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Immutability">
+  <rdfs:subClassOf rdf:resource="#Feature"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Concurrency">
+  <rdfs:subClassOf rdf:resource="#Feature"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CustomTypes">
+  <rdfs:subClassOf rdf:resource="#Feature"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ProductTypes">
+  <rdfs:subClassOf rdf:resource="#CustomTypes"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Structures">
+  <rdfs:subClassOf rdf:resource="#ProductTypes"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SumTypes">
+  <rdfs:subClassOf rdf:resource="#CustomTypes"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MemoryManagement">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AutomaticMemoryManagement">
+  <rdfs:subClassOf rdf:resource="#MemoryManagement"/>
+  <rdfs:subClassOf rdf:resource="#Abstraction"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TracingGC">
+  <rdfs:subClassOf rdf:resource="#AutomaticMemoryManagement"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SemiAutomaticMemoryManagement">
+  <rdfs:subClassOf rdf:resource="#MemoryManagement"/>
+</owl:Class>
+
+<owl:Class rdf:about="#EvaluationStrategy">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TypeChecking">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TypeSafety">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ErrorHandling">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ErrorInReturnType">
+  <rdfs:subClassOf rdf:resource="#ErrorHandling"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UseCase">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RunningEnvironment">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Interpreter">
+  <rdfs:subClassOf rdf:resource="#RunningEnvironment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LineByLineInterpreter">
+  <rdfs:subClassOf rdf:resource="#Interpreter"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ByteCodeInterpreter">
+  <rdfs:subClassOf rdf:resource="#Interpreter"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NativeEnvironment">
+  <rdfs:subClassOf rdf:resource="#RunningEnvironment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ProgrammingLanguage">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HighLevelLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LowLevelLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ConcurrentLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ImperativeLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#StructuredLanguage">
+  <rdfs:subClassOf rdf:resource="#ImperativeLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AssemblyLanguage">
+  <rdfs:subClassOf rdf:resource="#ImperativeLanguage"/>
+  <rdfs:subClassOf rdf:resource="#LowLevelLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ProceduralLanguage">
+  <rdfs:subClassOf rdf:resource="#StructuredLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DeclarativeLanguage">
+  <rdfs:subClassOf rdf:resource="#HighLevelLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FunctionalInspiredLanguage">
+  <rdfs:subClassOf rdf:resource="#HighLevelLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FunctionalLanguage">
+  <rdfs:subClassOf rdf:resource="#FunctionalInspiredLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PureFunctionalLanguage">
+  <rdfs:subClassOf rdf:resource="#FunctionalLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LazyEvaluatedLanguage">
+  <rdfs:subClassOf rdf:resource="#PureFunctionalLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LogicLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#QueryLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HasAlgebraicTypes">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#OOPinspiredLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#OOPLanguage">
+  <rdfs:subClassOf rdf:resource="#OOPinspiredLanguage"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#has_feature"/>
+          <owl:allValuesFrom rdf:resource="#classes"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#has_feature"/>
+          <owl:allValuesFrom rdf:resource="#inheritance"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#MultiParadigmLanguage">
+  <rdfs:subClassOf rdf:resource="#OOPinspiredLanguage"/>
+  <rdfs:subClassOf rdf:resource="#FunctionalInspiredLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#StaticallyTypedLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DynamicallyTypedLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#StronglyTypedLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#WeaklyTypedLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SafeTypeCheckingLanguage">
+  <rdfs:subClassOf rdf:resource="#StaticallyTypedLanguage"/>
+  <rdfs:subClassOf rdf:resource="#StronglyTypedLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ErrorSafeLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SafeLanguage">
+  <rdfs:subClassOf rdf:resource="#ErrorSafeLanguage"/>
+  <rdfs:subClassOf rdf:resource="#SafeTypeCheckingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ModernFunctionalLanguage">
+  <rdfs:subClassOf rdf:resource="#PureFunctionalLanguage"/>
+  <rdfs:subClassOf rdf:resource="#SafeTypeCheckingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CompiledLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LanguageWithRuntime">
+  <rdfs:subClassOf rdf:resource="#HighLevelLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CompiledToByteCodeLanguage">
+  <rdfs:subClassOf rdf:resource="#CompiledLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CompiledToMachineCodeLanguage">
+  <rdfs:subClassOf rdf:resource="#CompiledLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FastLanguage">
+  <rdfs:subClassOf rdf:resource="#CompiledToMachineCodeLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#InterpretedLanguage">
+  <rdfs:subClassOf rdf:resource="#LanguageWithRuntime"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ScriptingLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ShellLanguage">
+  <rdfs:subClassOf rdf:resource="#ScriptingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#JVMLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#GarbageCollectedLanguage">
+  <rdfs:subClassOf rdf:resource="#LanguageWithRuntime"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ReferenceCountedLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MultifunctionalLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PopularLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#InfluencedLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#InfluentialLanguage">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FatherLanguage">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CurlyBracketLanguages">
+  <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#instructions">
+  <rdf:type rdf:resource="#Feature"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#inheritance">
+  <rdf:type rdf:resource="#Feature"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#rules">
+  <rdf:type rdf:resource="#Statements"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#facts">
+  <rdf:type rdf:resource="#Statements"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#queries">
+  <rdf:type rdf:resource="#Statements"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#function_definitions">
+  <rdf:type rdf:resource="#Statements"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#functions_as_first_order_citizens">
+  <rdf:type rdf:resource="#Abstraction"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#higher_order_functions">
+  <rdf:type rdf:resource="#Abstraction"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#pure_functions">
+  <rdf:type rdf:resource="#Abstraction"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#blocks">
+  <rdf:type rdf:resource="#CodeStructures"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#procedures">
+  <rdf:type rdf:resource="#CodeStructures"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#loops">
+  <rdf:type rdf:resource="#CodeStructures"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#default_immutability">
+  <rdf:type rdf:resource="#Immutability"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#strict_immutability">
+  <rdf:type rdf:resource="#Immutability"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#threads">
+  <rdf:type rdf:resource="#Concurrency"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#coroutines">
+  <rdf:type rdf:resource="#Concurrency"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#processes">
+  <rdf:type rdf:resource="#Concurrency"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#async_functions">
+  <rdf:type rdf:resource="#Concurrency"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#monad_concurrency">
+  <rdf:type rdf:resource="#Concurrency"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#structs">
+  <rdf:type rdf:resource="#Structures"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#tuples">
+  <rdf:type rdf:resource="#ProductTypes"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#classes">
+  <rdf:type rdf:resource="#Structures"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#simple_enums">
+  <rdf:type rdf:resource="#Feature"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#rich_enums">
+  <rdf:type rdf:resource="#SumTypes"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#case_classes">
+  <rdf:type rdf:resource="#SumTypes"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#union_types">
+  <rdf:type rdf:resource="#SumTypes"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#manual_memory_management">
+  <rdf:type rdf:resource="#MemoryManagement"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#reference_counting">
+  <rdf:type rdf:resource="#AutomaticMemoryManagement"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#garbage_first_GC">
+  <rdf:type rdf:resource="#TracingGC"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#borrow_checker">
+  <rdf:type rdf:resource="#SemiAutomaticMemoryManagement"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#strict_evaluation">
+  <rdf:type rdf:resource="#EvaluationStrategy"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#lazy_evaluation">
+  <rdf:type rdf:resource="#EvaluationStrategy"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#static_type_checking">
+  <rdf:type rdf:resource="#TypeChecking"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#dynamic_type_checking">
+  <rdf:type rdf:resource="#TypeChecking"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#strong_type_safety">
+  <rdf:type rdf:resource="#TypeSafety"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#weak_type_safety">
+  <rdf:type rdf:resource="#TypeSafety"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#null_pointers">
+  <rdf:type rdf:resource="#ErrorHandling"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#exceptions">
+  <rdf:type rdf:resource="#ErrorHandling"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#errors_as_sum _types">
+  <rdf:type rdf:resource="#ErrorInReturnType"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#errors_as_values">
+  <rdf:type rdf:resource="#ErrorInReturnType"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#web_applications">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#mobile_applications">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#desktop_applications">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#enterprise_level_applications">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#cloud_applications">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#scientific_computing">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#AI_and_ML_field">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#OS_development">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#game_development">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#database_management_systems_development">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#compilers_and_interpreters_development">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#embedded_development">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#financial_and_banking_software">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#research">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#databases">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#highly_concurrent_applications">
+  <rdf:type rdf:resource="#UseCase"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#bash_interpreter">
+  <rdf:type rdf:resource="#LineByLineInterpreter"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#jvm">
+  <rdf:type rdf:resource="#ByteCodeInterpreter"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#x86">
+  <rdf:type rdf:resource="#NativeEnvironment"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#x64">
+  <rdf:type rdf:resource="#NativeEnvironment"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#arm">
+  <rdf:type rdf:resource="#NativeEnvironment"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#mips">
+  <rdf:type rdf:resource="#NativeEnvironment"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#c">
+  <rdf:type rdf:resource="#FastLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#procedures"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#structs"/>
+  <has_feature rdf:resource="#processes"/>
+  <has_memory_management rdf:resource="#manual_memory_management"/>
+  <runs_on rdf:resource="#NativeEnvironment"/>
+  <has_error_handling_type rdf:resource="#null_pointers"/>
+  <used_for rdf:resource="#game_development"/>
+  <used_for rdf:resource="#desktop_applications"/>
+  <used_for rdf:resource="#OS_development"/>
+  <used_for rdf:resource="#embedded_development"/>
+  <used_for rdf:resource="#compilers_and_interpreters_development"/>
+  <used_for rdf:resource="#database_management_systems_development"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#c++">
+  <rdf:type rdf:resource="#FastLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#procedures"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#simple_enums"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_feature rdf:resource="#coroutines"/>
+  <has_memory_management rdf:resource="#manual_memory_management"/>
+  <runs_on rdf:resource="#NativeEnvironment"/>
+  <has_error_handling_type rdf:resource="#null_pointers"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#game_development"/>
+  <used_for rdf:resource="#desktop_applications"/>
+  <used_for rdf:resource="#enterprise_level_applications"/>
+  <used_for rdf:resource="#OS_development"/>
+  <used_for rdf:resource="#embedded_development"/>
+  <used_for rdf:resource="#compilers_and_interpreters_development"/>
+  <used_for rdf:resource="#database_management_systems_development"/>
+  <inter_op_with rdf:resource="#c"/>
+  <inspired_by rdf:resource="#c"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#c#">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#simple_enums"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_feature rdf:resource="#async_functions"/>
+  <has_feature rdf:resource="#coroutines"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#ByteCodeInterpreter"/>
+  <has_error_handling_type rdf:resource="#null_pointers"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#game_development"/>
+  <used_for rdf:resource="#desktop_applications"/>
+  <used_for rdf:resource="#enterprise_level_applications"/>
+  <used_for rdf:resource="#web_applications"/>
+  <inspired_by rdf:resource="#c++"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#java">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#simple_enums"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#jvm"/>
+  <has_error_handling_type rdf:resource="#null_pointers"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#web_applications"/>
+  <used_for rdf:resource="#cloud_applications"/>
+  <used_for rdf:resource="#desktop_applications"/>
+  <used_for rdf:resource="#enterprise_level_applications"/>
+  <used_for rdf:resource="#mobile_applications"/>
+  <inspired_by rdf:resource="#c++"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#kotlin">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#simple_enums"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_feature rdf:resource="#case_classes"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#jvm"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <has_error_handling_type rdf:resource="#errors_as_sum _types"/>
+  <used_for rdf:resource="#web_applications"/>
+  <used_for rdf:resource="#desktop_applications"/>
+  <used_for rdf:resource="#enterprise_level_applications"/>
+  <used_for rdf:resource="#mobile_applications"/>
+  <inspired_by rdf:resource="#c++"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#python">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_feature rdf:resource="#async_functions"/>
+  <has_feature rdf:resource="#tuples"/>
+  <has_memory_management rdf:resource="#reference_counting"/>
+  <runs_on rdf:resource="#LineByLineInterpreter"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#web_applications"/>
+  <used_for rdf:resource="#AI_and_ML_field"/>
+  <used_for rdf:resource="#scientific_computing"/>
+  <used_for rdf:resource="#desktop_applications"/>
+  <used_for rdf:resource="#enterprise_level_applications"/>
+  <used_for rdf:resource="#OS_development"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#bash">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_memory_management rdf:resource="#manual_memory_management"/>
+  <runs_on rdf:resource="#LineByLineInterpreter"/>
+  <has_error_handling_type rdf:resource="#errors_as_values"/>
+  <used_for rdf:resource="#OS_development"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#powershell">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#LineByLineInterpreter"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#OS_development"/>
+  <inspired_by rdf:resource="#bash"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#haskell">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#tuples"/>
+  <has_feature rdf:resource="#rich_enums"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#lazy_evaluation"/>
+  <has_feature rdf:resource="#strict_immutability"/>
+  <has_feature rdf:resource="#monad_concurrency"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_error_handling_type rdf:resource="#errors_as_sum _types"/>
+  <used_for rdf:resource="#scientific_computing"/>
+  <used_for rdf:resource="#highly_concurrent_applications"/>
+  <used_for rdf:resource="#compilers_and_interpreters_development"/>
+  <used_for rdf:resource="#financial_and_banking_software"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#rust">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#structs"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#rich_enums"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_feature rdf:resource="#async_functions"/>
+  <has_feature rdf:resource="#tuples"/>
+  <has_feature rdf:resource="#default_immutability"/>
+  <has_memory_management rdf:resource="#borrow_checker"/>
+  <runs_on rdf:resource="#NativeEnvironment"/>
+  <has_error_handling_type rdf:resource="#errors_as_sum _types"/>
+  <used_for rdf:resource="#embedded_development"/>
+  <used_for rdf:resource="#AI_and_ML_field"/>
+  <used_for rdf:resource="#game_development"/>
+  <used_for rdf:resource="#web_applications"/>
+  <used_for rdf:resource="#OS_development"/>
+  <used_for rdf:resource="#compilers_and_interpreters_development"/>
+  <used_for rdf:resource="#database_management_systems_development"/>
+  <inspired_by rdf:resource="#c++"/>
+  <inspired_by rdf:resource="#haskell"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#go">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#structs"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#coroutines"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#NativeEnvironment"/>
+  <has_error_handling_type rdf:resource="#errors_as_values"/>
+  <used_for rdf:resource="#cloud_applications"/>
+  <used_for rdf:resource="#enterprise_level_applications"/>
+  <used_for rdf:resource="#web_applications"/>
+  <inspired_by rdf:resource="#c"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#ruby">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#simple_enums"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#ByteCodeInterpreter"/>
+  <has_error_handling_type rdf:resource="#null_pointers"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#web_applications"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#php">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#simple_enums"/>
+  <has_feature rdf:resource="#threads"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#jvm"/>
+  <has_error_handling_type rdf:resource="#null_pointers"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#web_applications"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#scheme">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#strict_immutability"/>
+  <has_memory_management rdf:resource="#reference_counting"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_error_handling_type rdf:resource="#research"/>
+  <has_error_handling_type rdf:resource="#AI_and_ML_field"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#closure">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#strict_immutability"/>
+  <has_memory_management rdf:resource="#reference_counting"/>
+  <runs_on rdf:resource="#jvm"/>
+  <has_error_handling_type rdf:resource="#errors_as_values"/>
+  <used_for rdf:resource="#highly_concurrent_applications"/>
+  <inspired_by rdf:resource="#scheme"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#scala">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#rich_enums"/>
+  <has_feature rdf:resource="#case_classes"/>
+  <has_feature rdf:resource="#monad_concurrency"/>
+  <has_feature rdf:resource="#async_functions"/>
+  <has_feature rdf:resource="#tuples"/>
+  <has_feature rdf:resource="#default_immutability"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#jvm"/>
+  <has_error_handling_type rdf:resource="#errors_as_sum _types"/>
+  <used_for rdf:resource="#cloud_applications"/>
+  <used_for rdf:resource="#highly_concurrent_applications"/>
+  <inspired_by rdf:resource="#java"/>
+  <inspired_by rdf:resource="#haskell"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#javascript">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#async_functions"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#web_applications"/>
+  <inspired_by rdf:resource="#java"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#typescript">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#async_functions"/>
+  <has_feature rdf:resource="#tuples"/>
+  <has_feature rdf:resource="#union_types"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_error_handling_type rdf:resource="#exceptions"/>
+  <used_for rdf:resource="#web_applications"/>
+  <inspired_by rdf:resource="#javascript"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#elm">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#tuples"/>
+  <has_feature rdf:resource="#rich_enums"/>
+  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#higher_order_functions"/>
+  <has_feature rdf:resource="#lazy_evaluation"/>
+  <has_feature rdf:resource="#strict_immutability"/>
+  <has_feature rdf:resource="#monad_concurrency"/>
+  <has_memory_management rdf:resource="#TracingGC"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_error_handling_type rdf:resource="#errors_as_sum _types"/>
+  <used_for rdf:resource="#web_applications"/>
+  <inspired_by rdf:resource="#haskell"/>
+  <inspired_by rdf:resource="#javascript"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#prolog">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#rules"/>
+  <has_feature rdf:resource="#facts"/>
+  <has_feature rdf:resource="#strict_immutability"/>
+  <has_memory_management rdf:resource="#reference_counting"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_type_checking rdf:resource="#dynamic_type_checking"/>
+  <used_for rdf:resource="#research"/>
+  <used_for rdf:resource="#AI_and_ML_field"/>
+  <used_for rdf:resource="#compilers_and_interpreters_development"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#sql">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#queries"/>
+  <has_feature rdf:resource="#strict_immutability"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <used_for rdf:resource="#databases"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#matlab">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#procedures"/>
+  <has_feature rdf:resource="#pure_functions"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <has_feature rdf:resource="#threads"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_type_safety rdf:resource="#strong_type_safety"/>
+  <has_type_checking rdf:resource="#dynamic_type_checking"/>
+  <used_for rdf:resource="#research"/>
+  <used_for rdf:resource="#scientific_computing"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#wolfram">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#procedures"/>
+  <has_feature rdf:resource="#pure_functions"/>
+  <has_feature rdf:resource="#threads"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_type_safety rdf:resource="#strong_type_safety"/>
+  <has_type_checking rdf:resource="#dynamic_type_checking"/>
+  <used_for rdf:resource="#research"/>
+  <used_for rdf:resource="#scientific_computing"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#r">
+  <rdf:type rdf:resource="#ProgrammingLanguage"/>
+  <has_feature rdf:resource="#blocks"/>
+  <has_feature rdf:resource="#loops"/>
+  <has_feature rdf:resource="#procedures"/>
+  <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#inheritance"/>
+  <runs_on rdf:resource="#Interpreter"/>
+  <has_type_safety rdf:resource="#strong_type_safety"/>
+  <has_type_checking rdf:resource="#dynamic_type_checking"/>
+  <used_for rdf:resource="#research"/>
+  <used_for rdf:resource="#scientific_computing"/>
+</owl:NamedIndividual>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#instructions"/>
+    <rdf:Description rdf:about="#inheritance"/>
+    <rdf:Description rdf:about="#rules"/>
+    <rdf:Description rdf:about="#facts"/>
+    <rdf:Description rdf:about="#queries"/>
+    <rdf:Description rdf:about="#function_definitions"/>
+    <rdf:Description rdf:about="#functions_as_first_order_citizens"/>
+    <rdf:Description rdf:about="#higher_order_functions"/>
+    <rdf:Description rdf:about="#pure_functions"/>
+    <rdf:Description rdf:about="#blocks"/>
+    <rdf:Description rdf:about="#procedures"/>
+    <rdf:Description rdf:about="#loops"/>
+    <rdf:Description rdf:about="#default_immutability"/>
+    <rdf:Description rdf:about="#strict_immutability"/>
+    <rdf:Description rdf:about="#threads"/>
+    <rdf:Description rdf:about="#coroutines"/>
+    <rdf:Description rdf:about="#processes"/>
+    <rdf:Description rdf:about="#async_functions"/>
+    <rdf:Description rdf:about="#monad_concurrency"/>
+    <rdf:Description rdf:about="#structs"/>
+    <rdf:Description rdf:about="#tuples"/>
+    <rdf:Description rdf:about="#classes"/>
+    <rdf:Description rdf:about="#simple_enums"/>
+    <rdf:Description rdf:about="#rich_enums"/>
+    <rdf:Description rdf:about="#case_classes"/>
+    <rdf:Description rdf:about="#union_types"/>
+    <rdf:Description rdf:about="#manual_memory_management"/>
+    <rdf:Description rdf:about="#reference_counting"/>
+    <rdf:Description rdf:about="#garbage_first_GC"/>
+    <rdf:Description rdf:about="#borrow_checker"/>
+    <rdf:Description rdf:about="#strict_evaluation"/>
+    <rdf:Description rdf:about="#lazy_evaluation"/>
+    <rdf:Description rdf:about="#static_type_checking"/>
+    <rdf:Description rdf:about="#dynamic_type_checking"/>
+    <rdf:Description rdf:about="#strong_type_safety"/>
+    <rdf:Description rdf:about="#weak_type_safety"/>
+    <rdf:Description rdf:about="#null_pointers"/>
+    <rdf:Description rdf:about="#exceptions"/>
+    <rdf:Description rdf:about="#errors_as_sum _types"/>
+    <rdf:Description rdf:about="#errors_as_values"/>
+    <rdf:Description rdf:about="#web_applications"/>
+    <rdf:Description rdf:about="#mobile_applications"/>
+    <rdf:Description rdf:about="#desktop_applications"/>
+    <rdf:Description rdf:about="#enterprise_level_applications"/>
+    <rdf:Description rdf:about="#cloud_applications"/>
+    <rdf:Description rdf:about="#scientific_computing"/>
+    <rdf:Description rdf:about="#AI_and_ML_field"/>
+    <rdf:Description rdf:about="#OS_development"/>
+    <rdf:Description rdf:about="#game_development"/>
+    <rdf:Description rdf:about="#database_management_systems_development"/>
+    <rdf:Description rdf:about="#compilers_and_interpreters_development"/>
+    <rdf:Description rdf:about="#embedded_development"/>
+    <rdf:Description rdf:about="#financial_and_banking_software"/>
+    <rdf:Description rdf:about="#research"/>
+    <rdf:Description rdf:about="#databases"/>
+    <rdf:Description rdf:about="#highly_concurrent_applications"/>
+    <rdf:Description rdf:about="#bash_interpreter"/>
+    <rdf:Description rdf:about="#jvm"/>
+    <rdf:Description rdf:about="#x86"/>
+    <rdf:Description rdf:about="#x64"/>
+    <rdf:Description rdf:about="#arm"/>
+    <rdf:Description rdf:about="#mips"/>
+    <rdf:Description rdf:about="#c"/>
+    <rdf:Description rdf:about="#c++"/>
+    <rdf:Description rdf:about="#c#"/>
+    <rdf:Description rdf:about="#java"/>
+    <rdf:Description rdf:about="#kotlin"/>
+    <rdf:Description rdf:about="#python"/>
+    <rdf:Description rdf:about="#bash"/>
+    <rdf:Description rdf:about="#powershell"/>
+    <rdf:Description rdf:about="#rust"/>
+    <rdf:Description rdf:about="#go"/>
+    <rdf:Description rdf:about="#ruby"/>
+    <rdf:Description rdf:about="#php"/>
+    <rdf:Description rdf:about="#haskell"/>
+    <rdf:Description rdf:about="#scheme"/>
+    <rdf:Description rdf:about="#closure"/>
+    <rdf:Description rdf:about="#scala"/>
+    <rdf:Description rdf:about="#javascript"/>
+    <rdf:Description rdf:about="#elm"/>
+    <rdf:Description rdf:about="#prolog"/>
+    <rdf:Description rdf:about="#matlab"/>
+    <rdf:Description rdf:about="#wolfram"/>
+    <rdf:Description rdf:about="#r"/>
+    <rdf:Description rdf:about="#sql"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+
+</rdf:RDF>
