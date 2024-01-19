@@ -1,6 +1,6 @@
 from owlready2 import *
 
-from pl_ontology.features import Abstraction
+from features import Abstraction
 
 class MemoryManagement(Thing):
     pass

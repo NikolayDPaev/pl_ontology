@@ -21,8 +21,14 @@ c = FastLanguage(hasFeature = [
     weakTypeStrictness
 ], hasErrorHandlingType = [
     nullPointers
-]
-)
+], usedFor = [
+    gamingDevelopment,
+    desktopApplications,
+    osDevelopment,
+    embeddedDevelopment,
+    compilerDevelopment,
+    databaseManagement
+])
 
 c_pp = FastLanguage(hasFeature = [
     blocks,
@@ -42,10 +48,18 @@ c_pp = FastLanguage(hasFeature = [
 ], typeSystemType = [
     staticTypeSystem
 ], typeStrictness = [
-    strongTypeStrictness
+    weakTypeStrictness
 ], hasErrorHandlingType = [
     nullPointers,
     exceptions
+], usedFor = [
+    gamingDevelopment,
+    desktopApplications,
+    enterpriseApplications,
+    osDevelopment,
+    embeddedDevelopment,
+    compilerDevelopment,
+    databaseManagement
 ])
 
 c_sharp = ProgrammingLanguage(hasFeature = [
@@ -70,6 +84,11 @@ c_sharp = ProgrammingLanguage(hasFeature = [
 ], hasErrorHandlingType = [
     nullPointers,
     exceptions
+], usedFor = [
+    gamingDevelopment,
+    desktopApplications,
+    enterpriseApplications,
+    webApplications
 ])
 
 java = ProgrammingLanguage(hasFeature = [
@@ -92,6 +111,12 @@ java = ProgrammingLanguage(hasFeature = [
 ], hasErrorHandlingType = [
     nullPointers,
     exceptions
+], usedFor = [
+    webApplications,
+    cloudApplications,
+    desktopApplications,
+    enterpriseApplications,
+    mobileApplications
 ])
 
 kotlin = ProgrammingLanguage(hasFeature = [
@@ -115,6 +140,11 @@ kotlin = ProgrammingLanguage(hasFeature = [
 ], hasErrorHandlingType = [
     exceptions,
     errorsAsSumTypes
+], usedFor = [
+    webApplications,
+    desktopApplications,
+    enterpriseApplications,
+    mobileApplications
 ])
 
 python = ProgrammingLanguage(hasFeature = [
@@ -137,8 +167,14 @@ python = ProgrammingLanguage(hasFeature = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
     exceptions
+], usedFor = [
+    webApplications,
+    aiDevelopment,
+    scientificComputing,
+    desktopApplications,
+    enterpriseApplications,
+    osDevelopment
 ])
-
 
 bash = ProgrammingLanguage(hasFeature = [
     blocks,
@@ -151,8 +187,9 @@ bash = ProgrammingLanguage(hasFeature = [
     weakTypeStrictness
 ], hasErrorHandlingType = [
     errorsAsValues
+], usedFor = [
+    osDevelopment
 ])
-
 
 powershell = ProgrammingLanguage(hasFeature = [
     blocks,
@@ -169,8 +206,9 @@ powershell = ProgrammingLanguage(hasFeature = [
     weakTypeStrictness
 ], hasErrorHandlingType = [
     exceptions
+], usedFor = [
+    osDevelopment
 ])
-
 
 rust = ProgrammingLanguage(hasFeature = [
     blocks,
@@ -193,6 +231,14 @@ rust = ProgrammingLanguage(hasFeature = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
     errorsAsSumTypes
+], usedFor = [
+    embeddedDevelopment,
+    aiDevelopment,
+    gamingDevelopment,
+    webApplications,
+    osDevelopment,
+    compilerDevelopment,
+    databaseManagement
 ])
 
 go = ProgrammingLanguage(hasFeature = [
@@ -212,10 +258,59 @@ go = ProgrammingLanguage(hasFeature = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
     errorsAsValues
+], usedFor = [
+    cloudApplications,
+    enterpriseApplications,
+    webApplications
 ])
 
-# ruby = ProgrammingLanguage()
-# php = ProgrammingLanguage()
+ruby = ProgrammingLanguage(hasFeature = [
+    blocks,
+    loops,
+    classes,
+    functionsAsFirstOrderCitizens,
+    higherOrderFunctions,
+    inheritance,
+    simpleEnums,
+    threads
+], hasMemoryManagement = [
+    TracingGC
+], runsOn = [
+    ByteCodeInterpreter
+], typeSystemType = [
+    dynamicTypeSystem
+], typeStrictness = [
+    strongTypeStrictness
+], hasErrorHandlingType = [
+    nullPointers,
+    exceptions
+], usedFor = [
+    webApplications
+])
+
+php = ProgrammingLanguage(hasFeature = [
+    blocks,
+    loops,
+    classes,
+    functionsAsFirstOrderCitizens,
+    higherOrderFunctions,
+    inheritance,
+    simpleEnums,
+    threads
+], hasMemoryManagement = [
+    TracingGC
+], runsOn = [
+    jvm
+], typeSystemType = [
+    dynamicTypeSystem
+], typeStrictness = [
+    weakTypeStrictness
+], hasErrorHandlingType = [
+    nullPointers,
+    exceptions
+], usedFor = [
+    webApplications
+])
 
 haskell = ProgrammingLanguage(hasFeature = [
     tuples,
@@ -235,6 +330,11 @@ haskell = ProgrammingLanguage(hasFeature = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
     errorsAsSumTypes
+], usedFor = [
+    scientificComputing,
+    highlyConcurrentApplications,
+    compilerDevelopment,
+    financialSoftware
 ])
 
 scheme = ProgrammingLanguage(hasFeature = [
@@ -250,7 +350,8 @@ scheme = ProgrammingLanguage(hasFeature = [
 ], typeStrictness = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
-    errorsAsValues
+    research,
+    aiDevelopment
 ])
 
 closure = ProgrammingLanguage(hasFeature = [
@@ -260,13 +361,15 @@ closure = ProgrammingLanguage(hasFeature = [
 ], hasMemoryManagement = [
     referenceCounting
 ], runsOn = [
-    Interpreter
+    jvm
 ], typeSystemType = [
     dynamicTypeSystem
 ], typeStrictness = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
     errorsAsValues
+], usedFor = [
+    highlyConcurrentApplications
 ])
 
 scala = ProgrammingLanguage(hasFeature = [
@@ -291,6 +394,9 @@ scala = ProgrammingLanguage(hasFeature = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
     errorsAsSumTypes
+], usedFor = [
+    cloudApplications,
+    highlyConcurrentApplications
 ])
 
 javascript = ProgrammingLanguage(hasFeature = [
@@ -310,6 +416,31 @@ javascript = ProgrammingLanguage(hasFeature = [
     weakTypeStrictness
 ], hasErrorHandlingType = [
     exceptions
+], usedFor = [
+    webApplications
+])
+
+typescript = ProgrammingLanguage(hasFeature = [
+    blocks,
+    loops,
+    classes,
+    functionsAsFirstOrderCitizens,
+    higherOrderFunctions,
+    asyncFunctions,
+    tuples,
+    unionTypes
+], hasMemoryManagement = [
+    TracingGC
+], runsOn = [
+    Interpreter
+], typeSystemType = [
+    staticTypeSystem
+], typeStrictness = [
+    strongTypeStrictness
+], hasErrorHandlingType = [
+    exceptions
+], usedFor = [
+    webApplications
 ])
 
 elm = ProgrammingLanguage(hasFeature = [
@@ -330,6 +461,8 @@ elm = ProgrammingLanguage(hasFeature = [
     strongTypeStrictness
 ], hasErrorHandlingType = [
     errorsAsSumTypes
+], usedFor = [
+    webApplications
 ])
 
 prolog = ProgrammingLanguage(hasFeature = [
@@ -340,6 +473,12 @@ prolog = ProgrammingLanguage(hasFeature = [
     referenceCounting
 ], runsOn = [
     Interpreter
+], hasTypeSystemType = [
+    dynamicTypeSystem
+], usedFor = [
+    research,
+    aiDevelopment,
+    compilerDevelopment
 ])
 
 sql = ProgrammingLanguage(hasFeature = [
@@ -347,13 +486,57 @@ sql = ProgrammingLanguage(hasFeature = [
     strictImmutability
 ], runsOn = [
     Interpreter
+], usedFor = [
+    databases
 ])
 
 matlab = ProgrammingLanguage(hasFeature = [
-    loops
-
+    loops,
+    procedures,
+    pureFunctions,
+    classes,
+    inheritance,
+    threads
 ], runsOn = [
     Interpreter
+], hasTypeStrictness = [
+    strongTypeStrictness
+], hasTypeSystemType = [
+    dynamicTypeSystem
+], usedFor = [
+    research,
+    scientificComputing
 ])
-wolframMathematica = ProgrammingLanguage()
-r = ProgrammingLanguage()
+
+wolframLanguage = ProgrammingLanguage(hasFeature = [
+    loops,
+    procedures,
+    pureFunctions,
+    threads
+], runsOn = [
+    Interpreter
+], hasTypeStrictness = [
+    strongTypeStrictness
+], hasTypeSystemType = [
+    dynamicTypeSystem
+], usedFor = [
+    research,
+    scientificComputing
+])
+
+r = ProgrammingLanguage(hasFeature = [
+    blocks,
+    loops,
+    procedures,
+    classes,
+    inheritance
+], runsOn = [
+    Interpreter
+], hasTypeStrictness = [
+    strongTypeStrictness
+], hasTypeSystemType = [
+    dynamicTypeSystem
+], usedFor = [
+    research,
+    scientificComputing
+])

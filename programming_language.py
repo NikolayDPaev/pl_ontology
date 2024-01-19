@@ -1,25 +1,22 @@
-from asyncio import exceptions
-from asyncore import loop
 from owlready2 import *
 
-from memory_management import referenceCounting, AutomaticMemoryManagement
-from running_environment import ByteCodeInterpreter, Interpreter, LineByLineInterpreter, NativeEnvironment
-from properties import HasSimilarSyntaxTo, Inspired, InspiredBy, UsedFor, UsedBy, hasErrorHandlingType, hasFeature, hasMemoryManagement, hasTypeStrictness, hasTypeSystemType, runsOn, UsedFor
-from others import ErrorInReturnType, lazyEvaluation, staticTypeSystem, strongTypeStrictness, dynamicTypeSystem, weakTypeStrictness, User, UseCase, nullPointers
-from programming_languages_individuals import c
-from features import *
-
-# Create an ontology
 onto = get_ontology("http://example.org/programming_languages.owl")
+
+from memory_management import *
+from running_environment import *
+from properties import *
+from others import *
+from programming_languages_individuals import *
+from features import *
 
 class ProgrammingLanguage(Thing):
     pass
 
 class HighLevelLanguage(ProgrammingLanguage):
-    hasFeature.min(1, Abstractions)
+    hasFeature.min(1, Abstraction)
 
 class LowLevelLanguage(ProgrammingLanguage):
-    hasFeature.max(1, Abstractions)
+    hasFeature.max(1, Abstraction)
 
 class ConcurrentLanguage(ProgrammingLanguage):
     hasFeature.only(Concurrency)
@@ -157,9 +154,4 @@ class FatherLanguage(Thing):
     Inspired.min(3, ProgrammingLanguage)
 
 
-# Individuals
-c = ProgrammingLanguage()
-
-
-# Save the ontology
 onto.save()

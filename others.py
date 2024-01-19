@@ -41,14 +41,22 @@ errorsAsValues = ErrorInReturnType()
 class UseCase(Thing):
     pass
 
-web = UseCase()
-mobile = UseCase()
-enterprise = UseCase()
-servers = UseCase()
-scientific = UseCase()
-ai = UseCase()
-os = UseCase()
-gaming = UseCase()
+webApplications = UseCase()
+mobileApplications = UseCase()
+desktopApplications = UseCase()
+enterpriseApplications = UseCase()
+cloudApplications = UseCase()
+scientificComputing = UseCase()
+aiDevelopment = UseCase()
+osDevelopment = UseCase()
+gamingDevelopment = UseCase()
+databaseManagement = UseCase()
+compilerDevelopment = UseCase()
+embeddedDevelopment = UseCase()
+financialSoftware = UseCase()
+research = UseCase()
+databases = UseCase()
+highlyConcurrentApplications = UseCase()
 
 # users
 

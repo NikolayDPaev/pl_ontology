@@ -75,3 +75,4 @@ simpleEnums = Feature()
 
 richEnums = SumTypes()
 caseClasses = SumTypes()
+unionTypes = SumTypes()

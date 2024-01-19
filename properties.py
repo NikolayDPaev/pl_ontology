@@ -1,15 +1,12 @@
 from owlready2 import *
 from sympy import symmetric_poly
-from pl_ontology.features import Feature
-from pl_ontology.memory_management import MemoryManagement
-from pl_ontology.others import ErrorHandling, EvaluationStrategy, TypeStrictness, TypeSystem, UseCase, User
-from pl_ontology.paradigms import Paradigm
+from features import Feature
+from memory_management import MemoryManagement
+from others import ErrorHandling, EvaluationStrategy, TypeStrictness, TypeSystem, UseCase, User
 
-from pl_ontology.programming_language import ProgrammingLanguage
-from pl_ontology.running_environment import RunningEnvironment
+from programming_language import ProgrammingLanguage
+from running_environment import RunningEnvironment
 
-
-# Object properties
 
 class UsedBy(ObjectProperty):
     domain = [ProgrammingLanguage]
@@ -28,7 +25,7 @@ class HasSimilarSyntaxTo(BetweenLanguagesProperty):
     symmetric = True
 
 class InspiredBy(BetweenLanguagesProperty):
-    inverse_property = Inspired
+    pass
 
 class Inspired(BetweenLanguagesProperty):
     inverse_property = InspiredBy
@@ -41,39 +38,37 @@ class FromTheSameCreators(BetweenLanguagesProperty):
 class InterOpWith(BetweenLanguagesProperty):
     pass
 
-# Class properties
-
-class runsOn(DataProperty):
+class runsOn(ObjectProperty):
     domain = [ProgrammingLanguage]
     range = [RunningEnvironment]
 
-class hasFeature(DataProperty):
+class hasFeature(ObjectProperty):
     domain = [ProgrammingLanguage]
     range = [Feature]
 
 # class defaultEvaluationType(ProgrammingLanguage):
 
-class hasErrorHandlingType(DataProperty):
+class hasErrorHandlingType(ObjectProperty):
     functional = True
     domain = [ProgrammingLanguage]
     range = [ErrorHandling]
 
-class hasEvaluationType(DataProperty):
+class hasEvaluationType(ObjectProperty):
     functional = True
     domain = [ProgrammingLanguage]
     range = [EvaluationStrategy]
 
-class hasTypeSystemType(DataProperty):
+class hasTypeSystemType(ObjectProperty):
     functional = True
     domain = [ProgrammingLanguage]
     range = [TypeSystem]
 
-class hasTypeStrictness(DataProperty):
+class hasTypeStrictness(ObjectProperty):
     functional = True
     domain = [ProgrammingLanguage]
     range = [TypeStrictness]
 
-class hasMemoryManagement(DataProperty):
+class hasMemoryManagement(ObjectProperty):
     functional = True
     domain = [ProgrammingLanguage]
     range = [MemoryManagement]
