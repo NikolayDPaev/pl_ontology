@@ -2,7 +2,8 @@ from owlready2 import *
 from sympy import symmetric_poly
 from pl_ontology.features import Feature
 from pl_ontology.memory_management import MemoryManagement
-from pl_ontology.others import EvaluationStrategy, TypeStrictness, TypeSystem, UseCase, User
+from pl_ontology.others import ErrorHandling, EvaluationStrategy, TypeStrictness, TypeSystem, UseCase, User
+from pl_ontology.paradigms import Paradigm
 
 from pl_ontology.programming_language import ProgrammingLanguage
 from pl_ontology.running_environment import RunningEnvironment
@@ -50,18 +51,29 @@ class hasFeature(DataProperty):
     domain = [ProgrammingLanguage]
     range = [Feature]
 
+# class defaultEvaluationType(ProgrammingLanguage):
+
+class hasErrorHandlingType(DataProperty):
+    functional = True
+    domain = [ProgrammingLanguage]
+    range = [ErrorHandling]
+
 class hasEvaluationType(DataProperty):
+    functional = True
     domain = [ProgrammingLanguage]
     range = [EvaluationStrategy]
 
-class typeSystemType(DataProperty):
+class hasTypeSystemType(DataProperty):
+    functional = True
     domain = [ProgrammingLanguage]
     range = [TypeSystem]
 
-class typeStrictness(DataProperty):
+class hasTypeStrictness(DataProperty):
+    functional = True
     domain = [ProgrammingLanguage]
     range = [TypeStrictness]
 
 class hasMemoryManagement(DataProperty):
+    functional = True
     domain = [ProgrammingLanguage]
     range = [MemoryManagement]

@@ -1,9 +1,11 @@
 from owlready2 import *
 
+from pl_ontology.features import Abstraction
+
 class MemoryManagement(Thing):
     pass
 
-class AutomaticMemoryManagement(MemoryManagement):
+class AutomaticMemoryManagement(MemoryManagement, Abstraction):
     pass
 
 class TracingGC(AutomaticMemoryManagement):

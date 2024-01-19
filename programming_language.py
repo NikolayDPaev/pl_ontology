@@ -1,10 +1,11 @@
+from asyncio import exceptions
 from asyncore import loop
 from owlready2 import *
 
 from memory_management import referenceCounting, AutomaticMemoryManagement
 from running_environment import ByteCodeInterpreter, Interpreter, LineByLineInterpreter, NativeEnvironment
-from properties import HasSimilarSyntaxTo, Inspired, InspiredBy, UsedFor, UsedBy, hasFeature, hasMemoryManagement, runsOn, UsedFor
-from others import lazyEvaluation, staticTypeSystem, strongTypeStrictness, dynamicTypeSystem, weakTypeStrictness, User, UseCase
+from properties import HasSimilarSyntaxTo, Inspired, InspiredBy, UsedFor, UsedBy, hasErrorHandlingType, hasFeature, hasMemoryManagement, hasTypeStrictness, hasTypeSystemType, runsOn, UsedFor
+from others import ErrorInReturnType, lazyEvaluation, staticTypeSystem, strongTypeStrictness, dynamicTypeSystem, weakTypeStrictness, User, UseCase, nullPointers
 from programming_languages_individuals import c
 from features import *
 
@@ -15,16 +16,19 @@ class ProgrammingLanguage(Thing):
     pass
 
 class HighLevelLanguage(ProgrammingLanguage):
-    pass
+    hasFeature.min(1, Abstractions)
 
 class LowLevelLanguage(ProgrammingLanguage):
-    pass
+    hasFeature.max(1, Abstractions)
+
+class ConcurrentLanguage(ProgrammingLanguage):
+    hasFeature.only(Concurrency)
 
 class ImperativeLanguage(ProgrammingLanguage):
     hasFeature.only(instructions)
 
 class StructuredLanguage(ImperativeLanguage):
-    hasFeature.only(loops)
+    hasFeature.only(CodeStructures)
 
 class AssemblyLanguage(ImperativeLanguage, LowLevelLanguage):
     runsOn.only(NativeEnvironment)
@@ -33,13 +37,15 @@ class ProceduralLanguage(StructuredLanguage):
     hasFeature.only(procedures)
 
 class DeclarativeLanguage(HighLevelLanguage):
-    hasFeature.only(statements)
+    hasFeature.only(Statements)
 
 class FunctionalInspiredLanguage(HighLevelLanguage):
     hasFeature.only(functionsAsFirstOrderCitizens)
     hasFeature.only(higherOrderFunctions)
 
+# inference that FunctionalLanguage is Declarative
 class FunctionalLanguage(FunctionalInspiredLanguage):
+    hasFeature.only(Statements)
     hasFeature.only(defaultImmutability)
 
 class PureFunctionalLanguage(FunctionalLanguage):
@@ -49,9 +55,14 @@ class PureFunctionalLanguage(FunctionalLanguage):
 class LazyEvaluatedLanguage(PureFunctionalLanguage):
     hasFeature.only(lazyEvaluation)
 
-class LogicLanguage(DeclarativeLanguage):
+# inference that LogicLanguage is Declarative
+class LogicLanguage(ProgrammingLanguage):
     hasFeature.only(facts)
     hasFeature.only(rules)
+
+# inference that QueryLanguage is Declarative
+class QueryLanguage(ProgrammingLanguage):
+    hasFeature.only(Statements)
 
 class HasAlgebraicTypes(ProgrammingLanguage):
     hasFeature.only(ProductTypes)
@@ -68,18 +79,24 @@ class MultiParadigmLanguage(OOPInspiredLanguage, FunctionalInspiredLanguage):
     pass
 
 class StaticallyTypedLanguage(ProgrammingLanguage):
-    hasFeature.only(staticTypeSystem)
+    hasTypeSystemType.only(staticTypeSystem)
 
 class DynamicallyTypedLanguage(ProgrammingLanguage):
-    hasFeature.only(dynamicTypeSystem)
+    hasTypeSystemType.only(dynamicTypeSystem)
 
 class StronglyTypedLanguage(ProgrammingLanguage):
-    hasFeature.only(strongTypeStrictness)
+    hasTypeStrictness.only(strongTypeStrictness)
 
 class WeaklyTypedLanguage(ProgrammingLanguage):
-    hasFeature.only(weakTypeStrictness)
+    hasTypeStrictness.only(weakTypeStrictness)
 
 class SafeTypeSystemLanguage(StaticallyTypedLanguage, StronglyTypedLanguage):
+    pass
+
+class ErrorSafeLanguage(ProgrammingLanguage):
+    hasErrorHandlingType.only(ErrorInReturnType)
+
+class SafeLanguage(ErrorSafeLanguage, SafeTypeSystemLanguage):
     pass
 
 class ModernFunctionalLanguage(PureFunctionalLanguage, SafeTypeSystemLanguage):

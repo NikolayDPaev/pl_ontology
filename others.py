@@ -1,10 +1,14 @@
 from owlready2 import *
 
+# evaluation
+
 class EvaluationStrategy(Thing):
     pass
 
 strictEvaluation = EvaluationStrategy()
 lazyEvaluation = EvaluationStrategy()
+
+# types
 
 class TypeSystem(Thing):
     pass
@@ -18,6 +22,22 @@ class TypeStrictness(Thing):
 strongTypeStrictness = TypeStrictness()
 weakTypeStrictness = TypeStrictness()
 
+# error handling
+
+class ErrorHandling(Thing):
+    pass
+
+nullPointers = ErrorHandling()
+exceptions = ErrorHandling()
+
+class ErrorInReturnType(ErrorHandling):
+    pass
+
+errorsAsSumTypes = ErrorInReturnType()
+errorsAsValues = ErrorInReturnType()
+
+# use cases
+
 class UseCase(Thing):
     pass
 
@@ -29,6 +49,8 @@ scientific = UseCase()
 ai = UseCase()
 os = UseCase()
 gaming = UseCase()
+
+# users
 
 class User(Thing):
     pass

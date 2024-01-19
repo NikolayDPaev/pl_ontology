@@ -63,13 +63,15 @@
 ### Feature
  - instructions
  - statements
+ - CodeStructures
+   - blocks
+   - procedures
+   - loops
  - facts
  - rules
  - functionsAsFirstOrderCitizens
  - higherOrderFunctions
  - pureFunctions
- - procedures
- - loops
  - DefaultImmutability
    - strictImmutability
  - inheritance
@@ -78,6 +80,12 @@
    - Structures
      - classes
  - sumTypes
+
+### Concurrency
+ - threads
+ - coRoutines
+ - processes
+ - asyncFunctions
 
 ### Evaluation
  - strict
@@ -170,3 +178,4 @@
  - matLab
  - wolframMathematica
  - r
+ - sql

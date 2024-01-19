@@ -3,15 +3,37 @@ from owlready2 import *
 class Feature(Thing):
     pass
 
+class Abstraction(Feature):
+    pass
+
 instructions = Feature()
-statements = Feature()
-rules = Feature()
-facts = Feature()
-functionsAsFirstOrderCitizens = Feature()
-higherOrderFunctions = Feature()
-pureFunctions = Feature()
-procedures = Feature()
-loops = Feature()
+
+# statements
+
+class Statements(Abstraction):
+    pass
+
+rules = Statements()
+facts = Statements()
+queries = Statements()
+functionDefinition = Statements()
+
+# different functions
+
+functionsAsFirstOrderCitizens = Abstraction()
+higherOrderFunctions = Abstraction() # maybe remove
+pureFunctions = Abstraction()
+
+# structures in the code
+
+class CodeStructures(Abstraction):
+    pass
+
+blocks = CodeStructures()
+procedures = CodeStructures()
+loops = CodeStructures()
+
+# immutability
 
 class Immutability(Feature):
     pass
@@ -20,6 +42,18 @@ defaultImmutability = Immutability()
 strictImmutability = Immutability()
 
 inheritance = Feature()
+
+# concurrency
+class Concurrency(Feature):
+    pass
+
+threads = Concurrency()
+coRoutines = Concurrency()
+processes = Concurrency()
+asyncFunctions = Concurrency()
+monadConcurrency = Concurrency()
+
+# types
 
 class CustomTypes(Feature):
     pass
@@ -37,5 +71,7 @@ structures = Structures()
 tuples = ProductTypes()
 classes = Structures()
 
-enums = SumTypes()
+simpleEnums = Feature()
+
+richEnums = SumTypes()
 caseClasses = SumTypes()
