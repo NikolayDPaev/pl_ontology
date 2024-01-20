@@ -5,9 +5,10 @@ onto = get_ontology("http://example.org/programming_languages.owl")
 with onto:
     ### Features
     class Feature(Thing): pass
-    instructions = Feature("instructions")
     inheritance = Feature("inheritance")
     class Abstraction(Feature): pass
+
+    lazyEvaluation = Feature("lazy_evaluation")
 
     # statements
     class Statements(Abstraction): pass
@@ -15,6 +16,12 @@ with onto:
     facts = Statements("facts")
     queries = Statements("queries")
     functionDefinition = Statements("function_definitions")
+
+    # execution type
+    class ExecutionType(Thing): pass
+    lineByLineExecution = ExecutionType("line_by_line_execution")
+    evaluationOfExpression = ExecutionType("evaluation_of_expression")
+    reasoner = ExecutionType("reasoner")
 
     # different functions
     functionsAsFirstOrderCitizens = Abstraction("functions_as_first_order_citizens")
@@ -64,26 +71,23 @@ with onto:
     g1 = TracingGC("garbage_first_GC")
     borrowChecker = SemiAutomaticMemoryManagement("borrow_checker")
 
-    # evaluation
-    class EvaluationStrategy(Thing): pass
-    strictEvaluation = EvaluationStrategy("strict_evaluation")
-    lazyEvaluation = EvaluationStrategy("lazy_evaluation")
-
     # type system
     class TypeChecking(Thing): pass
     staticTypeChecking = TypeChecking("static_type_checking")
     dynamicTypeChecking = TypeChecking("dynamic_type_checking")
+    # TypeChecking.is_a.append(OneOf([staticTypeChecking, dynamicTypeChecking]))
 
     class TypeSafety(Thing): pass
     strongTypeSafety = TypeSafety("strong_type_safety")
     weakTypeSafety = TypeSafety("weak_type_safety")
+    # TypeSafety.is_a.append(OneOf([weakTypeSafety, strongTypeSafety]))
 
     # error handling
     class ErrorHandling(Thing): pass
     nullPointers = ErrorHandling("null_pointers")
     exceptions = ErrorHandling("exceptions")
     class ErrorInReturnType(ErrorHandling): pass
-    errorsAsSumTypes = ErrorInReturnType("errors_as_sum _types")
+    errorsAsSumTypes = ErrorInReturnType("errors_as_sum_types")
     errorsAsValues = ErrorInReturnType("errors_as_values")
 
     # use cases
@@ -134,10 +138,6 @@ with onto:
 
     ### Properties
 
-    # class UsedBy(ObjectProperty):
-    #     domain = [ProgrammingLanguage]
-    #     range = [User]
-
     class used_for(ObjectProperty):
         domain = [ProgrammingLanguage]
         range = [UseCase]
@@ -146,10 +146,12 @@ with onto:
         reflexive = True
         symmetric = True
 
-    class inspired_by(ProgrammingLanguage >> ProgrammingLanguage): pass
+    class inspired_by(ProgrammingLanguage >> ProgrammingLanguage):
+        transitive = True
 
     class inspired(ProgrammingLanguage >> ProgrammingLanguage):
         inverse_property = inspired_by
+        transitive = True
 
     class from_the_same_creators(ProgrammingLanguage >> ProgrammingLanguage):
         reflexive = True
@@ -162,12 +164,11 @@ with onto:
 
     class has_feature(ProgrammingLanguage >> Feature): pass
 
+    class has_execution_type(ProgrammingLanguage >> ExecutionType): pass
+
     # class defaultEvaluationType(ProgrammingLanguage):
 
     class has_error_handling_type(ProgrammingLanguage >> ErrorHandling):
-        functional = True
-
-    class has_evaluation_type(ProgrammingLanguage >> EvaluationStrategy):
         functional = True
 
     class has_type_checking(ProgrammingLanguage >> TypeChecking):
@@ -181,152 +182,249 @@ with onto:
 
     ### Classes
     class HighLevelLanguage(ProgrammingLanguage):
-        has_feature.min(1, Abstraction)
+        equivalent_to = [
+            has_feature.min(1, Abstraction)
+        ]
 
     class LowLevelLanguage(ProgrammingLanguage):
-        has_feature.max(1, Abstraction)
+        equivalent_to = [
+            has_feature.max(1, Abstraction)
+        ]
 
     class ConcurrentLanguage(ProgrammingLanguage):
-        has_feature.only(Concurrency)
+        equivalent_to = [
+            has_feature.only(Concurrency)
+        ]
 
     class ImperativeLanguage(ProgrammingLanguage):
-        has_feature.only(instructions)
+        equivalent_to = [
+            has_execution_type.value(lineByLineExecution)
+        ]
 
     class StructuredLanguage(ImperativeLanguage):
-        has_feature.only(CodeStructures)
+        equivalent_to = [
+            has_feature.only(CodeStructures)
+        ]
 
     class AssemblyLanguage(ImperativeLanguage, LowLevelLanguage):
-        runs_on.only(NativeEnvironment)
+        equivalent_to = [
+            ImperativeLanguage &
+            LowLevelLanguage &
+            runs_on.only(NativeEnvironment)
+        ]
 
     class ProceduralLanguage(StructuredLanguage):
-        has_feature.only(procedures)
+        equivalent_to = [
+            has_feature.value(procedures)
+        ]
 
     class DeclarativeLanguage(HighLevelLanguage):
-        has_feature.only(Statements)
+        equivalent_to = [
+            has_feature.only(Statements)
+        ]
 
     class FunctionalInspiredLanguage(HighLevelLanguage):
-        has_feature.only(functionsAsFirstOrderCitizens)
-        has_feature.only(higherOrderFunctions)
+        equivalent_to = [
+            has_feature.value(functionsAsFirstOrderCitizens) &
+            has_feature.value(higherOrderFunctions)
+        ]
 
     # inference that FunctionalLanguage is Declarative
     class FunctionalLanguage(FunctionalInspiredLanguage):
-        has_feature.only(Statements)
-        has_feature.only(defaultImmutability)
+        equivalent_to = [
+            has_execution_type.value(evaluationOfExpression) &
+            has_feature.only(Immutability)
+        ]
 
     class PureFunctionalLanguage(FunctionalLanguage):
-        has_feature.only(pureFunctions)
-        has_feature.only(strictImmutability)
+        equivalent_to = [
+            FunctionalLanguage &
+            has_feature.value(pureFunctions) &
+            has_feature.value(strictImmutability)
+        ]
 
     class LazyEvaluatedLanguage(PureFunctionalLanguage):
-        has_feature.only(lazyEvaluation)
+        equivalent_to = [
+            PureFunctionalLanguage &
+            has_feature.value(lazyEvaluation)
+        ]
 
     # inference that LogicLanguage is Declarative
     class LogicLanguage(ProgrammingLanguage):
-        has_feature.only(facts)
-        has_feature.only(rules)
+        equivalent_to = [
+            has_feature.value(facts) &
+            has_feature.value(rules)
+        ]
 
     # inference that QueryLanguage is Declarative
     class QueryLanguage(ProgrammingLanguage):
-        has_feature.only(Statements)
+        equivalent_to = [
+            has_feature.value(queries)
+        ]
 
     class HasAlgebraicTypes(ProgrammingLanguage):
-        has_feature.only(ProductTypes)
-        has_feature.only(SumTypes)
+        equivalent_to = [
+            has_feature.only(ProductTypes) &
+            has_feature.only(SumTypes)
+        ]
 
-    class OOPinspiredLanguage(ProgrammingLanguage):
-        has_feature.only(Structures)
+    class OOPInspiredLanguage(ProgrammingLanguage):
+        equivalent_to = [
+            has_feature.only(Structures)
+        ]
 
-    class OOPLanguage(OOPinspiredLanguage):
-        equivalent_to = [has_feature.only(classes) & has_feature.only(inheritance)]
-        # has_feature.only(classes)
-        # has_feature.only(inheritance)
+    class OOPLanguage(OOPInspiredLanguage):
+        equivalent_to = [
+            has_feature.value(classes) &
+            has_feature.value(inheritance)
+        ]
 
-    class MultiParadigmLanguage(OOPinspiredLanguage, FunctionalInspiredLanguage): pass
+    class MultiParadigmLanguage(OOPInspiredLanguage, FunctionalInspiredLanguage):
+        equivalent_to = [
+            OOPInspiredLanguage &
+            FunctionalInspiredLanguage
+        ]
 
     class StaticallyTypedLanguage(ProgrammingLanguage):
-        has_type_checking.only(staticTypeChecking)
+        equivalent_to = [
+            has_type_checking.value(staticTypeChecking)
+        ]
 
     class DynamicallyTypedLanguage(ProgrammingLanguage):
-        has_type_checking.only(dynamicTypeChecking)
+        equivalent_to = [
+        has_type_checking.value(dynamicTypeChecking)
+        ]
 
     class StronglyTypedLanguage(ProgrammingLanguage):
-        has_type_safety.only(strongTypeSafety)
+        equivalent_to = [
+            has_type_safety.value(strongTypeSafety)
+        ]
 
     class WeaklyTypedLanguage(ProgrammingLanguage):
-        has_type_safety.only(weakTypeSafety)
+        equivalent_to = [
+            has_type_safety.value(weakTypeSafety)
+        ]
 
-    class SafeTypeCheckingLanguage(StaticallyTypedLanguage, StronglyTypedLanguage): pass
+    class SafeTypeCheckingLanguage(StaticallyTypedLanguage, StronglyTypedLanguage):
+        equivalent_to = [
+            StaticallyTypedLanguage &
+            StronglyTypedLanguage
+        ]
 
     class ErrorSafeLanguage(ProgrammingLanguage):
-        has_error_handling_type.only(ErrorInReturnType)
+        equivalent_to = [
+            has_error_handling_type.only(ErrorInReturnType)
+        ]
 
-    class SafeLanguage(ErrorSafeLanguage, SafeTypeCheckingLanguage): pass
+    class SafeLanguage(ErrorSafeLanguage, SafeTypeCheckingLanguage):
+        equivalent_to = [
+            ErrorSafeLanguage &
+            SafeTypeCheckingLanguage
+        ]
 
-    class ModernFunctionalLanguage(PureFunctionalLanguage, SafeTypeCheckingLanguage): pass
+    class ModernFunctionalLanguage(PureFunctionalLanguage, SafeTypeCheckingLanguage):
+        equivalent_to = [
+            PureFunctionalLanguage &
+            SafeTypeCheckingLanguage
+        ]
 
-    class CompiledLanguage(ProgrammingLanguage): pass
+    class CompiledLanguage(ProgrammingLanguage):
+        pass
 
-    class LanguageWithRuntime(HighLevelLanguage): pass
+    class LanguageWithRuntime(HighLevelLanguage):
+        pass
 
     class CompiledToByteCodeLanguage(CompiledLanguage):
-        runs_on.only(ByteCodeInterpreter)
+        equivalent_to = [
+            runs_on.only(ByteCodeInterpreter)
+        ]
 
     class CompiledToMachineCodeLanguage(CompiledLanguage):
-        runs_on.only(NativeEnvironment)
+        equivalent_to = [
+            runs_on.only(NativeEnvironment)
+        ]
 
     class FastLanguage(CompiledToMachineCodeLanguage):
-        Not(LanguageWithRuntime)
+        equivalent_to = [
+            CompiledToMachineCodeLanguage &
+            Not(LanguageWithRuntime)
+        ]
 
     class InterpretedLanguage(LanguageWithRuntime):
-        runs_on.only(Interpreter)
+        equivalent_to = [
+            runs_on.only(Interpreter)
+        ]
 
     # inference that Scripting < Interpreted
     class ScriptingLanguage(ProgrammingLanguage):
-        runs_on.only(LineByLineInterpreter)
+        equivalent_to = [
+            runs_on.only(LineByLineInterpreter)
+        ]
 
     class ShellLanguage(ScriptingLanguage):
-        used_for.only(os)
+        equivalent_to = [
+            ScriptingLanguage &
+            used_for.value(osDevelopment)
+        ]
 
     # inference that JVMLanguage < Interpreted
     class JVMLanguage(ProgrammingLanguage):
-        runs_on.only(LineByLineInterpreter)
+        equivalent_to = [
+            runs_on.value(jvm)
+        ]
 
     class GarbageCollectedLanguage(LanguageWithRuntime):
-        has_memory_management.only(AutomaticMemoryManagement)
+        equivalent_to = [
+            has_memory_management.only(AutomaticMemoryManagement)
+        ]
 
     # inference that ReferenceCounted < GarbageCollected
     class ReferenceCountedLanguage(ProgrammingLanguage):
-        has_memory_management.only(referenceCounting)
+        equivalent_to = [
+            has_memory_management.value(referenceCounting)
+        ]
 
     class MultifunctionalLanguage(ProgrammingLanguage):
-        used_for.min(2, UseCase)
+        equivalent_to = [
+            used_for.min(2, UseCase)
+        ]
 
     class PopularLanguage(ProgrammingLanguage):
-        used_for.min(3, UseCase)
+        equivalent_to = [
+            used_for.min(3, UseCase)
+        ]
 
     class InfluencedLanguage(ProgrammingLanguage):
-        inspired_by.min(2, ProgrammingLanguage)
+        equivalent_to = [
+            inspired_by.min(2, ProgrammingLanguage)
+        ]
 
     class InfluentialLanguage(ProgrammingLanguage):
-        inspired.min(2, ProgrammingLanguage)
+        equivalent_to = [
+            inspired.min(2, ProgrammingLanguage)
+        ]
 
     class FatherLanguage(Thing):
-        inspired.min(3, ProgrammingLanguage)
+        equivalent_to = [
+            inspired.min(3, ProgrammingLanguage)
+        ]
 
     # Individuals
-    c = FastLanguage("c", has_feature = [
+    c = ProgrammingLanguage("c", has_feature = [
         blocks,
         procedures,
         loops,
         structures,
         processes
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         manualMemoryManagement
     ], runs_on = [
         NativeEnvironment
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         weakTypeSafety
     ], has_error_handling_type = [
         nullPointers
@@ -340,9 +438,11 @@ with onto:
     ])
 
     class CurlyBracketLanguages(ProgrammingLanguage):
-        has_similar_syntax_to.only(c)
+        equivalent_to = [
+            has_similar_syntax_to.only(c)
+        ]
 
-    c_pp = FastLanguage("c++", has_feature = [
+    c_pp = ProgrammingLanguage("c++", has_feature = [
         blocks,
         procedures,
         loops,
@@ -353,13 +453,15 @@ with onto:
         simpleEnums,
         threads,
         coRoutines
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         manualMemoryManagement
     ], runs_on = [
         NativeEnvironment
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         weakTypeSafety
     ], has_error_handling_type = [
         nullPointers,
@@ -389,13 +491,15 @@ with onto:
         threads,
         asyncFunctions,
         coRoutines
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         ByteCodeInterpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         nullPointers,
@@ -418,13 +522,15 @@ with onto:
         inheritance,
         simpleEnums,
         threads
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         jvm
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         nullPointers,
@@ -449,13 +555,15 @@ with onto:
         simpleEnums,
         threads,
         caseClasses
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         jvm
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         exceptions,
@@ -479,13 +587,15 @@ with onto:
         threads,
         asyncFunctions,
         tuples
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         referenceCounting
     ], runs_on = [
         LineByLineInterpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         dynamicTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         exceptions
@@ -501,11 +611,13 @@ with onto:
     bash = ProgrammingLanguage("bash", has_feature = [
         blocks,
         loops
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         manualMemoryManagement
     ], runs_on = [
         LineByLineInterpreter
-    ], TypeSafety = [
+    ], has_type_safety = [
         weakTypeSafety
     ], has_error_handling_type = [
         errorsAsValues
@@ -518,13 +630,15 @@ with onto:
         loops,
         classes,
         inheritance
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         LineByLineInterpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         dynamicTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         weakTypeSafety
     ], has_error_handling_type = [
         exceptions
@@ -542,13 +656,15 @@ with onto:
         lazyEvaluation,
         strictImmutability,
         monadConcurrency
+    ], has_execution_type = [
+        evaluationOfExpression
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         Interpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         errorsAsSumTypes
@@ -570,13 +686,15 @@ with onto:
         asyncFunctions,
         tuples,
         defaultImmutability
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         borrowChecker
     ], runs_on = [
         NativeEnvironment
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         errorsAsSumTypes
@@ -600,13 +718,15 @@ with onto:
         functionsAsFirstOrderCitizens,
         higherOrderFunctions,
         coRoutines
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         NativeEnvironment
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         errorsAsValues
@@ -627,13 +747,15 @@ with onto:
         inheritance,
         simpleEnums,
         threads
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         ByteCodeInterpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         dynamicTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         nullPointers,
@@ -651,13 +773,15 @@ with onto:
         inheritance,
         simpleEnums,
         threads
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         jvm
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         dynamicTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         weakTypeSafety
     ], has_error_handling_type = [
         nullPointers,
@@ -670,13 +794,15 @@ with onto:
         functionsAsFirstOrderCitizens,
         higherOrderFunctions,
         strictImmutability
+    ], has_execution_type = [
+        evaluationOfExpression
     ], has_memory_management = [
         referenceCounting
     ], runs_on = [
         Interpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         dynamicTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         research,
@@ -687,13 +813,15 @@ with onto:
         functionsAsFirstOrderCitizens,
         higherOrderFunctions,
         strictImmutability
+    ], has_execution_type = [
+        evaluationOfExpression
     ], has_memory_management = [
-        referenceCounting
+        g1
     ], runs_on = [
         jvm
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         dynamicTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         errorsAsValues
@@ -715,13 +843,16 @@ with onto:
         asyncFunctions,
         tuples,
         defaultImmutability
+    ], has_execution_type = [
+        evaluationOfExpression,
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         jvm
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         errorsAsSumTypes
@@ -740,13 +871,15 @@ with onto:
         functionsAsFirstOrderCitizens,
         higherOrderFunctions,
         asyncFunctions,
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         Interpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         dynamicTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         weakTypeSafety
     ], has_error_handling_type = [
         exceptions
@@ -765,13 +898,15 @@ with onto:
         asyncFunctions,
         tuples,
         unionTypes
+    ], has_execution_type = [
+        lineByLineExecution
     ], has_memory_management = [
         TracingGC
     ], runs_on = [
         Interpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
     ], has_error_handling_type = [
         exceptions
@@ -787,16 +922,20 @@ with onto:
         functionsAsFirstOrderCitizens,
         higherOrderFunctions,
         lazyEvaluation,
-        strictImmutability,
-        monadConcurrency
-    ], has_memory_management = [
+        strictImmutability
+    ], has_execution_type = [
+        evaluationOfExpression
+    ],
+    has_memory_management = [
         TracingGC
     ], runs_on = [
         Interpreter
-    ], TypeCheckingType = [
+    ], has_type_checking = [
         staticTypeChecking
-    ], TypeSafety = [
+    ], has_type_safety = [
         strongTypeSafety
+    ],has_similar_syntax_to = [
+        haskell
     ], has_error_handling_type = [
         errorsAsSumTypes
     ], used_for = [
@@ -810,6 +949,8 @@ with onto:
         rules,
         facts,
         strictImmutability
+    ], has_execution_type = [
+        reasoner
     ], has_memory_management = [
         referenceCounting
     ], runs_on = [
@@ -825,6 +966,8 @@ with onto:
     sql = ProgrammingLanguage("sql",has_feature = [
         queries,
         strictImmutability
+    ], has_execution_type = [
+        reasoner
     ], runs_on = [
         Interpreter
     ], used_for = [
@@ -838,6 +981,8 @@ with onto:
         classes,
         inheritance,
         threads
+    ], has_execution_type = [
+        lineByLineExecution
     ], runs_on = [
         Interpreter
     ], has_type_safety = [
@@ -854,6 +999,8 @@ with onto:
         procedures,
         pureFunctions,
         threads
+    ], has_execution_type = [
+        lineByLineExecution
     ], runs_on = [
         Interpreter
     ], has_type_safety = [
@@ -871,6 +1018,8 @@ with onto:
         procedures,
         classes,
         inheritance
+    ], has_execution_type = [
+        lineByLineExecution
     ], runs_on = [
         Interpreter
     ], has_type_safety = [
@@ -882,7 +1031,7 @@ with onto:
         scientificComputing
     ])
 
-AllDifferent([instructions, inheritance, rules, facts, queries, functionDefinition, functionsAsFirstOrderCitizens, higherOrderFunctions, pureFunctions, blocks, procedures, loops, defaultImmutability, strictImmutability, threads, coRoutines, processes, asyncFunctions, monadConcurrency, structures, tuples, classes, simpleEnums, richEnums, caseClasses, unionTypes, manualMemoryManagement, referenceCounting, g1, borrowChecker, strictEvaluation, lazyEvaluation, staticTypeChecking, dynamicTypeChecking, strongTypeSafety, weakTypeSafety, nullPointers, exceptions, errorsAsSumTypes, errorsAsValues, webApplications, mobileApplications, desktopApplications, enterpriseApplications, cloudApplications, scientificComputing, aiDevelopment, osDevelopment, gameDevelopment, databaseManagement, compilerDevelopment, embeddedDevelopment, financialSoftware, research, databases, highlyConcurrentApplications, bash_interpreter, jvm, x86, x64, arm, mips, c, c_pp, c_sharp, java, kotlin, python, bash, powershell, rust, go, ruby, php, haskell, scheme, closure, scala, javascript, elm, prolog, matlab, wolframLanguage, r, sql])
+AllDifferent([inheritance, rules, facts, queries, functionDefinition, functionsAsFirstOrderCitizens, higherOrderFunctions, pureFunctions, blocks, procedures, loops, defaultImmutability, strictImmutability, threads, coRoutines, processes, asyncFunctions, monadConcurrency, structures, tuples, classes, simpleEnums, richEnums, caseClasses, unionTypes, manualMemoryManagement, referenceCounting, g1, borrowChecker, lazyEvaluation, staticTypeChecking, dynamicTypeChecking, strongTypeSafety, weakTypeSafety, nullPointers, exceptions, errorsAsSumTypes, errorsAsValues, webApplications, mobileApplications, desktopApplications, enterpriseApplications, cloudApplications, scientificComputing, aiDevelopment, osDevelopment, gameDevelopment, databaseManagement, compilerDevelopment, embeddedDevelopment, financialSoftware, research, databases, highlyConcurrentApplications, bash_interpreter, jvm, x86, x64, arm, mips, c, c_pp, c_sharp, java, kotlin, python, bash, powershell, rust, go, ruby, php, haskell, scheme, closure, scala, javascript, elm, prolog, matlab, wolframLanguage, r, sql])
 
-# close_world(ProgrammingLanguage)
+# close_world(onto)
 onto.save(file = "programming_languages.owl", format = "rdfxml")
