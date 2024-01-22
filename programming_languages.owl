@@ -279,7 +279,7 @@
       <owl:intersectionOf rdf:parseType="Collection">
         <owl:Restriction>
           <owl:onProperty rdf:resource="#has_feature"/>
-          <owl:hasValue rdf:resource="#functions_as_first_order_citizens"/>
+          <owl:hasValue rdf:resource="#functions_as_first_class_citizens"/>
         </owl:Restriction>
         <owl:Restriction>
           <owl:onProperty rdf:resource="#has_feature"/>
@@ -616,9 +616,11 @@
     <owl:Class>
       <owl:intersectionOf rdf:parseType="Collection">
         <rdf:Description rdf:about="#CompiledToMachineCodeLanguage"/>
-        <owl:Class>
-          <owl:complementOf rdf:resource="#LanguageWithRuntime"/>
-        </owl:Class>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#has_memory_management"/>
+          <owl:onClass rdf:resource="#AutomaticMemoryManagement"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
+        </owl:Restriction>
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
@@ -719,7 +721,7 @@
   <rdf:type rdf:resource="#Statements"/>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="#functions_as_first_order_citizens">
+<owl:NamedIndividual rdf:about="#functions_as_first_class_citizens">
   <rdf:type rdf:resource="#Abstraction"/>
 </owl:NamedIndividual>
 
@@ -1020,7 +1022,7 @@
   <has_feature rdf:resource="#procedures"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#simple_enums"/>
@@ -1050,7 +1052,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#simple_enums"/>
@@ -1077,7 +1079,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#simple_enums"/>
@@ -1103,7 +1105,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#simple_enums"/>
@@ -1129,7 +1131,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#threads"/>
@@ -1181,7 +1183,7 @@
   <rdf:type rdf:resource="#ProgrammingLanguage"/>
   <has_feature rdf:resource="#tuples"/>
   <has_feature rdf:resource="#rich_enums"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#lazy_evaluation"/>
   <has_feature rdf:resource="#pure_functions"/>
@@ -1204,7 +1206,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#structs"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#rich_enums"/>
   <has_feature rdf:resource="#threads"/>
@@ -1234,7 +1236,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#structs"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#co_routines"/>
   <has_execution_type rdf:resource="#line_by_line_execution"/>
@@ -1256,7 +1258,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#simple_enums"/>
@@ -1276,7 +1278,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#simple_enums"/>
@@ -1294,7 +1296,7 @@
 
 <owl:NamedIndividual rdf:about="#scheme">
   <rdf:type rdf:resource="#ProgrammingLanguage"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#strict_immutability"/>
   <has_execution_type rdf:resource="#evaluation_of_expression"/>
@@ -1308,7 +1310,7 @@
 
 <owl:NamedIndividual rdf:about="#closure">
   <rdf:type rdf:resource="#ProgrammingLanguage"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#strict_immutability"/>
   <has_execution_type rdf:resource="#evaluation_of_expression"/>
@@ -1326,7 +1328,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#rich_enums"/>
   <has_feature rdf:resource="#case_classes"/>
@@ -1352,7 +1354,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#async_functions"/>
   <has_execution_type rdf:resource="#line_by_line_execution"/>
@@ -1371,7 +1373,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#async_functions"/>
   <has_feature rdf:resource="#tuples"/>
@@ -1392,7 +1394,7 @@
   <has_feature rdf:resource="#tuples"/>
   <has_feature rdf:resource="#rich_enums"/>
   <has_feature rdf:resource="#pure_functions"/>
-  <has_feature rdf:resource="#functions_as_first_order_citizens"/>
+  <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#strict_immutability"/>
   <has_execution_type rdf:resource="#evaluation_of_expression"/>
@@ -1484,7 +1486,7 @@
     <rdf:Description rdf:about="#rules"/>
     <rdf:Description rdf:about="#facts"/>
     <rdf:Description rdf:about="#queries"/>
-    <rdf:Description rdf:about="#functions_as_first_order_citizens"/>
+    <rdf:Description rdf:about="#functions_as_first_class_citizens"/>
     <rdf:Description rdf:about="#higher_order_functions"/>
     <rdf:Description rdf:about="#pure_functions"/>
     <rdf:Description rdf:about="#blocks"/>

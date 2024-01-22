@@ -369,7 +369,7 @@ with onto:
     class FastLanguage(ProgrammingLanguage):
         equivalent_to = [
             CompiledToMachineCodeLanguage &
-            Not(LanguageWithRuntime)
+            has_memory_management.exactly(0,AutomaticMemoryManagement)
         ]
 
     # inference that ReferenceCounted < GarbageCollected
