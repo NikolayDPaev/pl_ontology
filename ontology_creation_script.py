@@ -359,12 +359,12 @@ with onto:
             has_memory_management.value(reference_counting)
         ]
 
-    class MultifunctionalLanguage(ProgrammingLanguage):
+    class MultiPurposeLanguage(ProgrammingLanguage):
         equivalent_to = [
             used_for.min(2, UseCase)
         ]
 
-    class PopularLanguage(ProgrammingLanguage):
+    class GeneralPurposeLanguage(ProgrammingLanguage):
         equivalent_to = [
             used_for.min(3, UseCase)
         ]

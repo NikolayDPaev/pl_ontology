@@ -598,7 +598,7 @@
   </owl:equivalentClass>
 </owl:Class>
 
-<owl:Class rdf:about="#MultifunctionalLanguage">
+<owl:Class rdf:about="#MultiPurposeLanguage">
   <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
   <owl:equivalentClass>
     <owl:Restriction>
@@ -609,7 +609,7 @@
   </owl:equivalentClass>
 </owl:Class>
 
-<owl:Class rdf:about="#PopularLanguage">
+<owl:Class rdf:about="#GeneralPurposeLanguage">
   <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
   <owl:equivalentClass>
     <owl:Restriction>

@@ -30,11 +30,6 @@
   <owl:inverseOf rdf:resource="#inspired_by"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#from_the_same_creators_as">
-  <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
-  <rdfs:range rdf:resource="#ProgrammingLanguage"/>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#inter_op_with">
   <rdfs:domain rdf:resource="#ProgrammingLanguage"/>
   <rdfs:range rdf:resource="#ProgrammingLanguage"/>
@@ -182,8 +177,7 @@
   <owl:equivalentClass>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#has_feature"/>
-      <owl:onClass rdf:resource="#Abstraction"/>
-      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+      <owl:someValuesFrom rdf:resource="#Abstraction"/>
     </owl:Restriction>
   </owl:equivalentClass>
 </owl:Class>
@@ -317,8 +311,8 @@
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#DeclarativeLanguage"/>
   <rdfs:subClassOf rdf:resource="#FunctionalInspiredLanguage"/>
+  <rdfs:subClassOf rdf:resource="#DeclarativeLanguage"/>
 </owl:Class>
 
 <owl:Class rdf:about="#PureFunctionalLanguage">
@@ -413,8 +407,8 @@
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#HighLevelLanguage"/>
   <rdfs:subClassOf rdf:resource="#OOPInspiredLanguage"/>
+  <rdfs:subClassOf rdf:resource="#HighLevelLanguage"/>
 </owl:Class>
 
 <owl:Class rdf:about="#MultiParadigmLanguage">
@@ -427,8 +421,8 @@
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#OOPInspiredLanguage"/>
   <rdfs:subClassOf rdf:resource="#FunctionalInspiredLanguage"/>
+  <rdfs:subClassOf rdf:resource="#OOPInspiredLanguage"/>
 </owl:Class>
 
 <owl:Class rdf:about="#StaticallyTypedLanguage">
@@ -530,9 +524,9 @@
       </owl:intersectionOf>
     </owl:Class>
   </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#HasAlgebraicTypes"/>
   <rdfs:subClassOf rdf:resource="#PureFunctionalLanguage"/>
   <rdfs:subClassOf rdf:resource="#SafeTypeCheckingLanguage"/>
+  <rdfs:subClassOf rdf:resource="#HasAlgebraicTypes"/>
 </owl:Class>
 
 <owl:Class rdf:about="#CompiledToByteCodeLanguage">
@@ -543,8 +537,8 @@
       <owl:someValuesFrom rdf:resource="#ByteCodeInterpreter"/>
     </owl:Restriction>
   </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#CompiledLanguage"/>
   <rdfs:subClassOf rdf:resource="#InterpretedLanguage"/>
+  <rdfs:subClassOf rdf:resource="#CompiledLanguage"/>
 </owl:Class>
 
 <owl:Class rdf:about="#CompiledToMachineCodeLanguage">
@@ -633,7 +627,7 @@
   <rdfs:subClassOf rdf:resource="#GarbageCollectedLanguage"/>
 </owl:Class>
 
-<owl:Class rdf:about="#MultifunctionalLanguage">
+<owl:Class rdf:about="#MultiPurposeLanguage">
   <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
   <owl:equivalentClass>
     <owl:Restriction>
@@ -644,7 +638,7 @@
   </owl:equivalentClass>
 </owl:Class>
 
-<owl:Class rdf:about="#PopularLanguage">
+<owl:Class rdf:about="#GeneralPurposeLanguage">
   <rdfs:subClassOf rdf:resource="#ProgrammingLanguage"/>
   <owl:equivalentClass>
     <owl:Restriction>
@@ -653,7 +647,7 @@
       <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:minQualifiedCardinality>
     </owl:Restriction>
   </owl:equivalentClass>
-  <rdfs:subClassOf rdf:resource="#MultifunctionalLanguage"/>
+  <rdfs:subClassOf rdf:resource="#MultiPurposeLanguage"/>
 </owl:Class>
 
 <owl:Class rdf:about="#InfluencedLanguage">
@@ -1147,14 +1141,14 @@
   <used_for rdf:resource="#embedded_development"/>
   <used_for rdf:resource="#compilers_and_interpreters_development"/>
   <used_for rdf:resource="#database_management_systems_development"/>
-  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#WeaklyTypedLanguage"/>
-  <rdf:type rdf:resource="#StaticallyTypedLanguage"/>
+  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#CompiledToMachineCodeLanguage"/>
+  <rdf:type rdf:resource="#StaticallyTypedLanguage"/>
   <rdf:type rdf:resource="#ProceduralLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#OOPInspiredLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
   <rdf:type rdf:resource="#InfluentialLanguage"/>
 </owl:NamedIndividual>
 
@@ -1187,15 +1181,15 @@
   <inter_op_with rdf:resource="#c"/>
   <inspired_by rdf:resource="#c"/>
   <has_similar_syntax_to rdf:resource="#c"/>
-  <rdf:type rdf:resource="#CurlyBracketLanguages"/>
   <rdf:type rdf:resource="#FatherLanguage"/>
-  <rdf:type rdf:resource="#ImperativeLanguage"/>
+  <rdf:type rdf:resource="#CurlyBracketLanguages"/>
   <rdf:type rdf:resource="#WeaklyTypedLanguage"/>
-  <rdf:type rdf:resource="#StaticallyTypedLanguage"/>
+  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#CompiledToMachineCodeLanguage"/>
+  <rdf:type rdf:resource="#StaticallyTypedLanguage"/>
   <rdf:type rdf:resource="#ProceduralLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
 </owl:NamedIndividual>
@@ -1229,9 +1223,9 @@
   <rdf:type rdf:resource="#SafeTypeCheckingLanguage"/>
   <rdf:type rdf:resource="#CompiledToByteCodeLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
@@ -1261,14 +1255,14 @@
   <used_for rdf:resource="#mobile_applications"/>
   <inspired_by rdf:resource="#c++"/>
   <has_similar_syntax_to rdf:resource="#c"/>
-  <rdf:type rdf:resource="#CurlyBracketLanguages"/>
   <rdf:type rdf:resource="#FatherLanguage"/>
+  <rdf:type rdf:resource="#CurlyBracketLanguages"/>
   <rdf:type rdf:resource="#SafeTypeCheckingLanguage"/>
   <rdf:type rdf:resource="#JVMLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
@@ -1302,10 +1296,10 @@
   <rdf:type rdf:resource="#SafeLanguage"/>
   <rdf:type rdf:resource="#JVMLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#HasAlgebraicTypes"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
@@ -1337,9 +1331,9 @@
   <rdf:type rdf:resource="#ScriptingLanguage"/>
   <rdf:type rdf:resource="#ReferenceCountedLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
-  <rdf:type rdf:resource="#StronglyTypedLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
+  <rdf:type rdf:resource="#StronglyTypedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
@@ -1357,8 +1351,8 @@
   <has_error_handling_type rdf:resource="#errors_as_values"/>
   <used_for rdf:resource="#OS_communication"/>
   <rdf:type rdf:resource="#ScriptingLanguage"/>
-  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#WeaklyTypedLanguage"/>
+  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#ShellLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
 </owl:NamedIndividual>
@@ -1378,8 +1372,8 @@
   <used_for rdf:resource="#OS_communication"/>
   <inspired_by rdf:resource="#bash"/>
   <rdf:type rdf:resource="#CompiledToByteCodeLanguage"/>
-  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#WeaklyTypedLanguage"/>
+  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#ShellLanguage"/>
   <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
@@ -1411,9 +1405,9 @@
   <rdf:type rdf:resource="#SafeLanguage"/>
   <rdf:type rdf:resource="#LazyEvaluatedLanguage"/>
   <rdf:type rdf:resource="#CompiledToMachineCodeLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#ModernFunctionalLanguage"/>
 </owl:NamedIndividual>
 
@@ -1448,10 +1442,10 @@
   <rdf:type rdf:resource="#SafeLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#CompiledToMachineCodeLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#InfluencedLanguage"/>
   <rdf:type rdf:resource="#HasAlgebraicTypes"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
 </owl:NamedIndividual>
@@ -1480,10 +1474,10 @@
   <rdf:type rdf:resource="#SafeTypeCheckingLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#CompiledToMachineCodeLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#InfluencedLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
 </owl:NamedIndividual>
@@ -1508,9 +1502,9 @@
   <used_for rdf:resource="#web_applications"/>
   <rdf:type rdf:resource="#CompiledToByteCodeLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
+  <rdf:type rdf:resource="#ConcurrentLanguage"/>
   <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#StronglyTypedLanguage"/>
-  <rdf:type rdf:resource="#ConcurrentLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
@@ -1538,10 +1532,10 @@
   <has_similar_syntax_to rdf:resource="#c"/>
   <rdf:type rdf:resource="#CurlyBracketLanguages"/>
   <rdf:type rdf:resource="#CompiledToByteCodeLanguage"/>
-  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#WeaklyTypedLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
+  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
@@ -1592,6 +1586,7 @@
   <has_feature rdf:resource="#blocks"/>
   <has_feature rdf:resource="#loops"/>
   <has_feature rdf:resource="#classes"/>
+  <has_feature rdf:resource="#inheritance"/>
   <has_feature rdf:resource="#functions_as_first_class_citizens"/>
   <has_feature rdf:resource="#higher_order_functions"/>
   <has_feature rdf:resource="#rich_enums"/>
@@ -1611,16 +1606,17 @@
   <used_for rdf:resource="#highly_concurrent_applications"/>
   <inspired_by rdf:resource="#java"/>
   <inspired_by rdf:resource="#haskell"/>
+  <rdf:type rdf:resource="#MultiPurposeLanguage"/>
   <rdf:type rdf:resource="#SafeLanguage"/>
   <rdf:type rdf:resource="#JVMLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#FunctionalLanguage"/>
   <rdf:type rdf:resource="#InfluencedLanguage"/>
   <rdf:type rdf:resource="#HasAlgebraicTypes"/>
-  <rdf:type rdf:resource="#MultifunctionalLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
+  <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
 </owl:NamedIndividual>
 
@@ -1642,12 +1638,12 @@
   <inspired_by rdf:resource="#java"/>
   <has_similar_syntax_to rdf:resource="#c"/>
   <rdf:type rdf:resource="#CurlyBracketLanguages"/>
-  <rdf:type rdf:resource="#ImperativeLanguage"/>
-  <rdf:type rdf:resource="#WeaklyTypedLanguage"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdf:type rdf:resource="#WeaklyTypedLanguage"/>
+  <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#InterpretedLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
@@ -1675,10 +1671,10 @@
   <rdf:type rdf:resource="#CurlyBracketLanguages"/>
   <rdf:type rdf:resource="#SafeTypeCheckingLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
-  <rdf:type rdf:resource="#HasAlgebraicTypes"/>
   <rdf:type rdf:resource="#InterpretedLanguage"/>
-  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
+  <rdf:type rdf:resource="#HasAlgebraicTypes"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
+  <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
   <rdf:type rdf:resource="#MultiParadigmLanguage"/>
   <rdf:type rdf:resource="#StructuredLanguage"/>
 </owl:NamedIndividual>
@@ -1721,10 +1717,10 @@
   <used_for rdf:resource="#AI_and_ML_field"/>
   <used_for rdf:resource="#compilers_and_interpreters_development"/>
   <rdf:type rdf:resource="#LogicLanguage"/>
+  <rdf:type rdf:resource="#GeneralPurposeLanguage"/>
   <rdf:type rdf:resource="#InterpretedLanguage"/>
   <rdf:type rdf:resource="#DeclarativeLanguage"/>
   <rdf:type rdf:resource="#GarbageCollectedLanguage"/>
-  <rdf:type rdf:resource="#PopularLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
 </owl:NamedIndividual>
 
@@ -1754,12 +1750,12 @@
   <has_type_checking rdf:resource="#dynamic_type_checking"/>
   <used_for rdf:resource="#research"/>
   <used_for rdf:resource="#scientific_computing"/>
+  <rdf:type rdf:resource="#MultiPurposeLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#ProceduralLanguage"/>
   <rdf:type rdf:resource="#InterpretedLanguage"/>
-  <rdf:type rdf:resource="#MultifunctionalLanguage"/>
-  <rdf:type rdf:resource="#StronglyTypedLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
+  <rdf:type rdf:resource="#StronglyTypedLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
 </owl:NamedIndividual>
@@ -1776,12 +1772,12 @@
   <has_type_checking rdf:resource="#dynamic_type_checking"/>
   <used_for rdf:resource="#research"/>
   <used_for rdf:resource="#scientific_computing"/>
+  <rdf:type rdf:resource="#MultiPurposeLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#ProceduralLanguage"/>
   <rdf:type rdf:resource="#InterpretedLanguage"/>
-  <rdf:type rdf:resource="#MultifunctionalLanguage"/>
-  <rdf:type rdf:resource="#StronglyTypedLanguage"/>
   <rdf:type rdf:resource="#ConcurrentLanguage"/>
+  <rdf:type rdf:resource="#StronglyTypedLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
 </owl:NamedIndividual>
 
@@ -1798,10 +1794,10 @@
   <has_type_checking rdf:resource="#dynamic_type_checking"/>
   <used_for rdf:resource="#research"/>
   <used_for rdf:resource="#scientific_computing"/>
+  <rdf:type rdf:resource="#MultiPurposeLanguage"/>
   <rdf:type rdf:resource="#ImperativeLanguage"/>
   <rdf:type rdf:resource="#ProceduralLanguage"/>
   <rdf:type rdf:resource="#InterpretedLanguage"/>
-  <rdf:type rdf:resource="#MultifunctionalLanguage"/>
   <rdf:type rdf:resource="#StronglyTypedLanguage"/>
   <rdf:type rdf:resource="#OOPLanguage"/>
   <rdf:type rdf:resource="#DynamicallyTypedLanguage"/>
