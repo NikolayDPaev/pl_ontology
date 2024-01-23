@@ -95,7 +95,7 @@ with onto:
     enterprise_applications = UseCase("enterprise_level_applications")
     cloud_applications = UseCase("cloud_applications")
     scientific_computing = UseCase("scientific_computing")
-    ai_development = UseCase("AI_and_ML_field")
+    ai_and_ml = UseCase("AI_and_ML_field")
     os_development = UseCase("OS_development")
     os_communication = UseCase("OS_communication")
     game_development = UseCase("game_development")
@@ -131,23 +131,18 @@ with onto:
     class ProgrammingLanguage(Thing): pass
 
     ### Properties
-
     class used_for(ProgrammingLanguage >> UseCase): pass
 
     class has_similar_syntax_to(ProgrammingLanguage >> ProgrammingLanguage):
         reflexive = True
         symmetric = True
+        transitive = True
 
     class inspired_by(ProgrammingLanguage >> ProgrammingLanguage):
         transitive = True
 
     class inspired(ProgrammingLanguage >> ProgrammingLanguage):
         inverse_property = inspired_by
-        transitive = True
-
-    class from_the_same_creators_as(ProgrammingLanguage >> ProgrammingLanguage):
-        reflexive = True
-        symmetric = True
         transitive = True
 
     class inter_op_with(ProgrammingLanguage >> ProgrammingLanguage): pass
@@ -175,12 +170,12 @@ with onto:
     ### Classes
     class HighLevelLanguage(ProgrammingLanguage):
         equivalent_to = [
-            has_feature.min(1, Abstraction)
+            has_feature.some(Abstraction)
         ]
 
     class LowLevelLanguage(ProgrammingLanguage):
         equivalent_to = [
-            has_feature.exactly(0, Abstraction)
+            Not(has_feature.some(Abstraction))
         ]
 
     class ConcurrentLanguage(ProgrammingLanguage):
@@ -297,15 +292,10 @@ with onto:
             StronglyTypedLanguage
         ]
 
-    class ErrorSafeLanguage(ProgrammingLanguage):
-        equivalent_to = [
-            has_error_handling_type.value(errors_as_sum_types)
-        ]
-
     class SafeLanguage(ProgrammingLanguage):
         equivalent_to = [
-            ErrorSafeLanguage &
-            SafeTypeCheckingLanguage
+            SafeTypeCheckingLanguage &
+            has_error_handling_type.value(errors_as_sum_types)
         ]
 
     class HasAlgebraicTypes(ProgrammingLanguage):
@@ -363,15 +353,6 @@ with onto:
             has_memory_management.some(AutomaticMemoryManagement)
         ]
 
-    class LanguageWithRuntime(ProgrammingLanguage):
-        equivalent_to = [InterpretedLanguage | GarbageCollectedLanguage]
-
-    class FastLanguage(ProgrammingLanguage):
-        equivalent_to = [
-            CompiledToMachineCodeLanguage &
-            has_memory_management.exactly(0,AutomaticMemoryManagement)
-        ]
-
     # inference that ReferenceCounted < GarbageCollected
     class ReferenceCountedLanguage(ProgrammingLanguage):
         equivalent_to = [
@@ -404,16 +385,6 @@ with onto:
         ]
 
     # Individuals
-    x86_assembly = ProgrammingLanguage("x86_assembly"
-    , has_execution_type = [line_by_line_execution]
-    , has_memory_management = [manual_memory_management]
-    , runs_on = [native_environment]
-    , has_type_safety = [weak_type_safety]
-    , has_error_handling_type = [null_pointers]
-    , used_for = [
-        embedded_development
-    ])
-
     c = ProgrammingLanguage("c", has_feature = [
         blocks,
         procedures,
@@ -572,7 +543,7 @@ with onto:
     , has_error_handling_type = [exceptions]
     , used_for = [
         web_applications,
-        ai_development,
+        ai_and_ml,
         scientific_computing,
         desktop_applications,
         enterprise_applications,
@@ -646,9 +617,8 @@ with onto:
     , has_error_handling_type = [errors_as_sum_types]
     , used_for = [
         embedded_development,
-        ai_development,
+        ai_and_ml,
         game_development,
-        web_applications,
         os_development,
         compiler_development,
         database_management
@@ -733,7 +703,7 @@ with onto:
     , has_type_safety = [strong_type_safety]
     , has_error_handling_type = [
         research,
-        ai_development
+        ai_and_ml
     ])
 
     closure = ProgrammingLanguage("closure",has_feature = [
@@ -750,10 +720,12 @@ with onto:
     , inspired_by = [scheme]
     )
 
-    scala = ProgrammingLanguage("scala",has_feature = [
+    scala = ProgrammingLanguage("scala"
+    ,has_feature = [
         blocks,
         loops,
         classes,
+        inheritance,
         functions_as_first_class_citizens,
         higher_order_functions,
         rich_enums,
@@ -841,12 +813,12 @@ with onto:
         facts,
         strict_immutability
     ], has_execution_type = [evaluation_of_query]
-    , has_memory_management = [reference_counting]
+    , has_memory_management = [generational_GC]
     , runs_on = [prolog_interpreter]
     , has_type_checking = [dynamic_type_checking]
     , used_for = [
         research,
-        ai_development,
+        ai_and_ml,
         compiler_development
     ])
 
@@ -903,7 +875,4 @@ with onto:
         scientific_computing
     ])
 
-AllDifferent([x86_assembly, os_communication, lazy_evaluation, inheritance, rules, facts, queries, functions_as_first_class_citizens, higher_order_functions, pure_functions, blocks, procedures, loops, default_immutability, strict_immutability, threads, co_routines, processes, async_functions, monad_concurrency, structures, tuples, classes, simple_enums, rich_enums, case_classes, union_types, line_by_line_execution, evaluation_of_expression, evaluation_of_query, manual_memory_management, reference_counting, generational_GC, borrow_checker, static_type_checking, dynamic_type_checking, strong_type_safety, weak_type_safety, null_pointers, exceptions, errors_as_sum_types, errors_as_values, web_applications, mobile_applications, desktop_applications, enterprise_applications, cloud_applications, scientific_computing, ai_development, os_development, game_development, database_management, compiler_development, embedded_development, financial_software, research, databases, highly_concurrent_applications, bash_interpreter, python_interpreter, jvm, dot_net_vm, ruby_vm, php_interpreter, v8_engine, scheme_repl, prolog_interpreter, matlab_language, wolfram_language, sql_server, r_studio, native_environment, c, c_pp, c_sharp, java, kotlin, python, bash, powershell, rust, go, ruby, php, haskell, scheme, closure, scala, javascript, elm, prolog, matlab, wolfram_language, r, sql])
-
-# close_world(ProgrammingLanguage)
-onto.save(file = "programming_languages.owl", format = "rdfxml")
+AllDifferent([os_communication, lazy_evaluation, inheritance, rules, facts, queries, functions_as_first_class_citizens, higher_order_functions, pure_functions, blocks, procedures, loops, default_immutability, strict_immutability, threads, co_routines, processes, async_functions, monad_concurrency, structures, tuples, classes, simple_enums, rich_enums, case_classes, union_types, line_by_line_execution, evaluation_of_expression, evaluation_of_query, manual_memory_management, reference_counting, generational_GC, borrow_checker, static_type_checking, dynamic_type_checking, strong_type_safety, weak_type_safety, null_pointers, exceptions, errors_as_sum_types, errors_as_values, web_applications, mobile_applications, desktop_applications, enterprise_applications, cloud_applications, scientific_computing, ai_and_ml, os_development, game_development, database_management, compiler_development, embedded_development, financial_software, research, databases, highly_concurrent_applications, bash_interpreter, python_interpreter, jvm, dot_net_vm, ruby_vm, php_interpreter, v8_engine, scheme_repl, prolog_interpreter, matlab_language, wolfram_language, sql_server, r_studio, native_environment, c, c_pp, c_sharp, java, kotlin, python, bash, powershell, rust, go, ruby, php, haskell, scheme, closure, scala, javascript, elm, prolog, matlab, wolfram_language, r, sql])
